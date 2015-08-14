@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 Monaco;
+\f3\fnil\fcharset0 LucidaSans-Demi;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww19620\viewh10940\viewkind0
+\deftab720
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720
+
+\f0\b\fs24 \cf0 README
+\f1\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720
+
+\f0 \cf0 In this program 
+\f1 \expnd0\expndtw0\kerning0
+each argument in the commands below is a size 11 array of integers except N and P which are single integers.\kerning1\expnd0\expndtw0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720
+
+\b \cf0 \expnd0\expndtw0\kerning0
+THE CLIENT PROGRAM
+\b0 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+Creates RPC handle for server, it asks the user to input data for the array and also to select the command desired to perform operation. The RPC handle is passed to client stubs.\kerning1\expnd0\expndtw0 \
+\
+\pard\pardeftab720
+
+\b \cf0 \expnd0\expndtw0\kerning0
+THE SERVER PROGRAM
+\b0 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+Used to provide the actual remote procedures that do the work.\kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720
+\cf0 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+Search (A, N): In response to this command A-Processor returns P if A[P-1]=N where P-1 is the smallest index such that A[P-1]=N; otherwise, A-Processor returns -1. For example, let A=[12, 43, 8, 10, 6, 9, 13, 10, 21, 33, 1] and N=10. Then P=4.\kerning1\expnd0\expndtw0 \
+\
+\expnd0\expndtw0\kerning0
+Zero (A, N): In response to this command A-Processor must replace every occurrence of N in A with 0 and return the resulting array. If A does not contain N, A-Processor returns a size 11 array where each entry contains -1. For example, let A=[12, 43, 8, 10, 6, 9, 13, 10, 21, 33, 1] and N=10. Then A-Processor returns [12, 43, 8, 0, 6, 9, 13, 0, 21, 33, 1].\kerning1\expnd0\expndtw0 \
+\
+\expnd0\expndtw0\kerning0
+Sum (A): In response to this command, A-Processor returns the sum of the integers in A.\kerning1\expnd0\expndtw0 \
+\
+\expnd0\expndtw0\kerning0
+Median (A): In response to this command, A-Processor returns the median of the integers in A.\kerning1\expnd0\expndtw0 \
+\
+\expnd0\expndtw0\kerning0
+Average (A): In response to this command, A-Processor returns the average of the integers in A.\kerning1\expnd0\expndtw0 \
+\
+\expnd0\expndtw0\kerning0
+STDEV (A): In response to this command, A-Processor returns the standard deviation of the integers in A. Assume that the numbers in A make up a sample from a population and use 10 (instead of 11) as the divisor in the square root formula for standard deviation.\kerning1\expnd0\expndtw0 \
+\
+\pard\pardeftab720
+
+\b \cf0 \expnd0\expndtw0\kerning0
+COMPILING
+\b0 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+Compiling the protocol definition: rpcgen -N stats.x\kerning1\expnd0\expndtw0 \
+\expnd0\expndtw0\kerning0
+Compiling the client program: 
+\f2\fs20 \kerning1\expnd0\expndtw0 gcc rstatsprog.c stats_clnt.c stats_xdr.c -o client
+\f1\fs24 \
+\expnd0\expndtw0\kerning0
+Compiling the server program: 
+\f2\fs20 \kerning1\expnd0\expndtw0 gcc stats_proc.c stats_svc.c stats_xdr.c -o server -lm
+\f1\fs24 \
+\
+\pard\pardeftab720
+
+\f3\b\fs20 \cf0 RUNNING
+\f1\b0\fs24 \
+\pard\pardeftab720
+\cf0 \expnd0\expndtw0\kerning0
+On the server machine, run the server: ./server\kerning1\expnd0\expndtw0 \
+\expnd0\expndtw0\kerning0
+On the client machine, run the client program ./client 127.0.0.1\
+\
+****************************************************************\
+OR\
+\
+gcc stats_prog.c\
+./a.out\kerning1\expnd0\expndtw0 \
+}
